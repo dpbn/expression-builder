@@ -1,0 +1,1 @@
+angular.module('os.directives', ['os.directives.expressions']);

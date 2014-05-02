@@ -1,0 +1,15 @@
+<div class="pull-left expression-element" ng-class="{'pull-left exression-element compound-expression': isCompound, 'pull-left exression-element': isCompound == false}">
+	<div ng-repeat="operand in expression.operands" class="pull-left expression-element">
+		<div class="pull-left" ng-if="operand.type=='value'" signals="$parent.$parent.signals" entities="$parent.$parent.entities" value="$parent.operand.value" operand></div>
+		<span ng-if="operand.type=='expression'" econtainer signals="$parent.$parent.signals" entities="$parent.$parent.entities"
+				expr="$parent.operand.value" readonly="$parent.$parent.readonly"></span>
+		<span ng-show="$index < $parent.expression.operands.length-1">
+			<a href="#" editable-select="expression.operator.value" ng-if="readonly == false" e-ng-options="o.value as o.label for o in $parent.ops">
+			    <span  popover="Set the operator by clicking this." popover-title="Editing operators" popover-animation="true" popover-trigger="mouseenter">
+			    	{{ expression.operator.label }}
+			    </span>
+			</a>
+			<span ng-if="readonly">{{expression.operator.label}}</span>
+		</span>
+	</div>
+</div>

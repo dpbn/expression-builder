@@ -1,0 +1,71 @@
+<div operand-container>
+	<a class="editable-click operand" ng-click="showList= !showList; listType='main';">{{value.label || value}}</a>
+	<div class="operand-list" ng-show="showList" ng-mouseleave="showList=false">
+		<!-- main menu -->
+		<ul class="list-group nomargin" ng-show="listType=='main'">
+			<li class="list-group-item operand-item" ng-click="listType='signal'">
+		    	<span class="badge">{{signals.length}}</span>Signals
+		  	</li>
+		  	<li class="list-group-item operand-item" ng-click="listType='entity'">
+		    	<span class="badge">{{entities.length}}</span>Entities
+		  	</li>
+		  	<li class="list-group-item operand-item">
+		  		<div>Enter a value</div>
+		  		<div class="operand-value-editor">
+		  			<div class="input-group">
+				    	<input type="text"  ng-model="proposedValue" class="form-control">
+				    	<span class="input-group-btn">
+				     		<button class="btn btn-default" type="button" ng-click="confirmProposedValue()"><span class="glyphicon glyphicon-ok"></span></button>
+				     		<button class="btn btn-default" type="button" ng-click="cancelProposedValue()"><span class="glyphicon glyphicon-remove"></span></button>
+				    	</span>
+				    </div>
+		  		</div>
+		  	</li>
+		</ul>
+		<!-- list of signals -->
+		<ul class="list-group nomargin" ng-show="listType=='signal'">
+			<li class="list-group-item operand-item" ng-click="listType='main'">
+		    	<span class="glyphicon glyphicon-chevron-left"></span> Back
+		  	</li>
+		  	<li class="list-group-item operand-item operand-group">
+		    	<ul class="list-group">
+		    		<li class="list-group-item operand-item" ng-repeat="signal in signals" ng-click="$parent.selectedSignal=signal; $parent.listType='signal-prop';">{{signal.name}}</li>
+		    	</ul>
+		  	</li>
+		</ul>
+		<!-- list of properties for selected signal -->
+		<ul class="list-group nomargin" ng-show="listType=='signal-prop'">
+			<li class="list-group-item operand-item" ng-click="listType='signal'">
+		    	<span class="glyphicon glyphicon-chevron-left"></span> Back to signals
+		  	</li>
+		  	<li class="list-group-item operand-item operand-group">
+		  		<ul class="list-group">
+		    		<li class="list-group-item operand-item" ng-repeat="field in selectedSignal.fields" ng-click="setSignalField(field)">{{field.label}}</li>
+		    	</ul>
+		  	</li>
+		</ul>
+
+		<!-- list of entities -->
+		<ul class="list-group nomargin" ng-show="listType=='entity'">
+			<li class="list-group-item operand-item" ng-click="listType='main'">
+		    	<span class="glyphicon glyphicon-chevron-left"></span> Back
+		  	</li>
+		  	<li class="list-group-item operand-item operand-group">
+		    	<ul class="list-group">
+		    		<li class="list-group-item operand-item" ng-repeat="entity in entities" ng-click="$parent.selectedEntity=entity; $parent.listType='entity-prop';">{{entity.label}}</li>
+		    	</ul>
+		  	</li>
+		</ul>
+		<!-- list of properties for selected entity -->
+		<ul class="list-group nomargin" ng-show="listType=='entity-prop'">
+			<li class="list-group-item operand-item" ng-click="listType='entity'">
+		    	<span class="glyphicon glyphicon-chevron-left"></span> Back to entities
+		  	</li>
+		  	<li class="list-group-item operand-item operand-group">
+		    	<ul class="list-group">
+		    		<li class="list-group-item operand-item" ng-repeat="field in selectedEntity.fields" ng-click="setEntityField(field)">{{field | camel2Label}}</li>
+		    	</ul>
+		  	</li>
+		</ul>
+	</div>  	
+</div>

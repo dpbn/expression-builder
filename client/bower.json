@@ -1,0 +1,28 @@
+{
+  "name": "rdt-template-app",
+  "version": "0.0.1",
+  "authors": [
+    "Rapid Development Team"
+  ],
+  "description": "RDT Template solution",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.0.3",
+    "underscore": "~1.5.2",
+    "angular": "~1.2.10",
+    "angular-resource": "~1.2.10",
+    "angular-cookies": "~1.2.10",
+    "angular-route": "~1.2.10",
+    "angular-mocks": "~1.2.10",
+    "angular-ui": "0.4.0",
+    "bootstrap": "~3.0.3"
+  }
+}

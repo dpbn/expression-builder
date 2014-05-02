@@ -1,0 +1,28 @@
+<div>
+	<div>
+		<h4 ng-if="model.expressions.length < 1">You haven't started building any rules yet.  
+			<button ng-click="startSimple()" class="btn btn-primary btn-sm">Start building one now!</button></h4>
+	</div>
+	<div class="container">
+		<div><strong>When</strong><span>{{model.expressionString}}</span></div>
+		<div class="container">
+			<div ng-if="model.selectedExpressions.length > 1">
+				<div class="btn-group">
+					<button class="btn btn-default btn-sm" ng-click="combineSelectedExpressions({value: '&&', label: 'and'})">and</button>
+					<button class="btn btn-default btn-sm" ng-click="combineSelectedExpressions({value: '||', label: 'or'})">or</button>
+				</div>
+			</div>
+			<div ng-repeat="expression in model.expressions" class="container">
+				<div class="pull-left"><input type="checkbox" ng-click="toggleSelection(expression)"></input></div>
+				<div class="pull-left" expression expr="expression.value" root="true" readonly="false" entities="entities" signals="signals"></div>
+				<div class="pull-left expression-element" ng-if="$index == $parent.model.expressions.length - 1">
+					<button class="btn btn-primary btn-xs" popover="Add a condition to this expression" popover-title="Add Condition" popover-trigger="mouseenter"
+							popover-animation="true" popover-placement="right" ng-click="addCondition()">+</button>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="container"><pre>{{model.expressions | json}}</pre></div>
+</div>
